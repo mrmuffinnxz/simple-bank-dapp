@@ -26,7 +26,7 @@ contract Account {
         return "withdrawn_success";
     }
 
-    function transfer(Account receiver, uint amount) public returns (string memory) {
+    function transferAmount(Account receiver, uint amount) public returns (string memory) {
         require(owner == msg.sender, "transfer_fail_not_owner");
         require(amount > 0, "transfer_fail_value_zero");
         require(address(this).balance >= amount, "transfer_fail_balance_not_enough");
