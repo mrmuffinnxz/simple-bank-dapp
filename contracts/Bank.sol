@@ -9,7 +9,7 @@ contract Bank {
     mapping(string => bool) isNameExist;
 
     function addAccount(string memory _name) public returns (string memory) {
-        require(isNameExist[_name] == true, "add_account_fail_name_exist");
+        require(isNameExist[_name] == false, "add_account_fail_name_exist");
         isNameExist[_name] = true;
         Account newAccount = new Account(_name);
         users[msg.sender].push(newAccount);
