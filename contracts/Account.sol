@@ -10,7 +10,7 @@ contract Account {
         owner = payable(_owner);
         name = _name;
     }
-
+    
     function deposit() public payable returns (string memory) {
         require(msg.value > 0, "deposit_fail_value_zero");
         return "deposit_success";
@@ -24,11 +24,11 @@ contract Account {
         return "withdrawn_success";
     }
 
-    function transfer(Account receiver, uint amount) public returns (string memory) {
-        require(owner == msg.sender, "withdrawn_fail_not_owner");
-        require(amount > 0, "withdrawn_fail_value_zero");
-        require(address(this).balance >= amount, "withdrawn_fail_balance_not_enough");
-        receiver.getOwner().transfer(amount);
+    function transfer(Account receiver, uint amount) public payable returns (string memory) {
+        require(owner == msg.sender, "transfer_fail_not_owner");
+        require(amount > 0, "transfer_fail_value_zero");
+        require(address(this).balance >= amount, "transfer_fail_balance_not_enough");
+        payable(address(receiver)).transfer(amount);
         return "transfer_success";
     }
 
