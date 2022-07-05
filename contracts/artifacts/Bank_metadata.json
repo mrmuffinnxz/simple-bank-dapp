@@ -1,0 +1,86 @@
+{
+	"compiler": {
+		"version": "0.8.15+commit.e14f2714"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "_name",
+						"type": "string"
+					}
+				],
+				"name": "addAccount",
+				"outputs": [
+					{
+						"internalType": "string",
+						"name": "",
+						"type": "string"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "getAccounts",
+				"outputs": [
+					{
+						"internalType": "contract Account[]",
+						"name": "",
+						"type": "address[]"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"contracts/Bank.sol": "Bank"
+		},
+		"evmVersion": "london",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"contracts/Account.sol": {
+			"keccak256": "0x4e2649fca9700115532747927166a92940775f56c1d0efc93a8c1b5a8753d745",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://582841e573f370175ac6439b8b13137ca0e9e8f14400cd3f056c47125ddeaf94",
+				"dweb:/ipfs/QmdCb4fDAMcW8PP7St137iRCinsnTBY7vkEpHfEqQQxtzf"
+			]
+		},
+		"contracts/Bank.sol": {
+			"keccak256": "0x5731c48bbb3427d871437625c3f18ccba08a39dd0ce9c206503c71eadade6969",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://486b299e5ef9f68861ad17c00bfd4718676a2bd635bb252d2e1ea43f5c5be79c",
+				"dweb:/ipfs/Qmd4ezX98Y9wxR9jBHKq1Vwd3MHERvpX11i8ZpUUxke4E1"
+			]
+		}
+	},
+	"version": 1
+}
