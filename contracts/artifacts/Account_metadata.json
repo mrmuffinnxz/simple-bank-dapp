@@ -22,15 +22,66 @@
 				"type": "constructor"
 			},
 			{
-				"inputs": [],
-				"name": "deposit",
-				"outputs": [
+				"anonymous": false,
+				"inputs": [
 					{
-						"internalType": "string",
-						"name": "",
-						"type": "string"
+						"indexed": false,
+						"internalType": "address",
+						"name": "_from",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "_amount",
+						"type": "uint256"
 					}
 				],
+				"name": "DepositEvent",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "contract Account",
+						"name": "_to",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "_amount",
+						"type": "uint256"
+					}
+				],
+				"name": "TransferAmountEvent",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "address",
+						"name": "_to",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "_amount",
+						"type": "uint256"
+					}
+				],
+				"name": "WithdrawnEvent",
+				"type": "event"
+			},
+			{
+				"inputs": [],
+				"name": "deposit",
+				"outputs": [],
 				"stateMutability": "payable",
 				"type": "function"
 			},
@@ -64,23 +115,17 @@
 				"inputs": [
 					{
 						"internalType": "contract Account",
-						"name": "receiver",
+						"name": "_receiver",
 						"type": "address"
 					},
 					{
 						"internalType": "uint256",
-						"name": "amount",
+						"name": "_amount",
 						"type": "uint256"
 					}
 				],
-				"name": "transfer",
-				"outputs": [
-					{
-						"internalType": "string",
-						"name": "",
-						"type": "string"
-					}
-				],
+				"name": "transferAmount",
+				"outputs": [],
 				"stateMutability": "nonpayable",
 				"type": "function"
 			},
@@ -88,18 +133,12 @@
 				"inputs": [
 					{
 						"internalType": "uint256",
-						"name": "amount",
+						"name": "_amount",
 						"type": "uint256"
 					}
 				],
 				"name": "withdrawn",
-				"outputs": [
-					{
-						"internalType": "string",
-						"name": "",
-						"type": "string"
-					}
-				],
+				"outputs": [],
 				"stateMutability": "nonpayable",
 				"type": "function"
 			},
@@ -136,11 +175,11 @@
 	},
 	"sources": {
 		"contracts/Account.sol": {
-			"keccak256": "0xac7caae121acff162e32d3f5de4280349965cc6d1a26d3eb9898d2b328189c39",
+			"keccak256": "0xf2e89966fa9bb8fb44b478241f53e570c59ba6df7f922b1fe37d9c4d3f1c6057",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://59a0673408f4f9c3d4d4e88884f5355610e4ddde2cdf2f2eb54888346397c9e3",
-				"dweb:/ipfs/QmZsdbjA7DfvaFRiMKqtNME6kB7uZBaQxnqde8N2i5xjdJ"
+				"bzz-raw://7fbedc975238471317efff55f594d156dcf3b00b2656337bf916b50eb861a367",
+				"dweb:/ipfs/Qmf1F7pLjxJNMS5LB4b1AWPRH4tZyDq4XcKxMHTJURUMnj"
 			]
 		}
 	},

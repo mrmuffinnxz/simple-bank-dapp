@@ -13,25 +13,29 @@ contract Account {
 
     receive() payable external {}
     
-    function deposit() public payable returns (string memory) {
+    event DepositEvent(address _from, uint _amount);
+    event WithdrawnEvent(address _to, uint _amount);
+    event TransferAmountEvent(Account _to, uint _amount);
+
+    function deposit() public payable {
         require(msg.value > 0, "deposit_fail_value_zero");
-        return "deposit_success";
+        emit DepositEvent(msg.sender, msg.value);
     }
 
-    function withdrawn(uint amount) public returns (string memory) {
+    function withdrawn(uint _amount) public {
         require(owner == msg.sender, "withdrawn_fail_not_owner");
-        require(amount > 0, "withdrawn_fail_value_zero");
-        require(address(this).balance >= amount, "withdrawn_fail_balance_not_enough");
-        payable(msg.sender).transfer(amount);
-        return "withdrawn_success";
+        require(_amount > 0, "withdrawn_fail_value_zero");
+        require(address(this).balance >= _amount, "withdrawn_fail_balance_not_enough");
+        payable(msg.sender).transfer(_amount);
+        emit WithdrawnEvent(msg.sender, _amount);
     }
 
-    function transferAmount(Account receiver, uint amount) public returns (string memory) {
+    function transferAmount(Account _receiver, uint _amount) public {
         require(owner == msg.sender, "transfer_fail_not_owner");
-        require(amount > 0, "transfer_fail_value_zero");
-        require(address(this).balance >= amount, "transfer_fail_balance_not_enough");
-        payable(address(receiver)).transfer(amount);
-        return "transfer_success";
+        require(_amount > 0, "transfer_fail_value_zero");
+        require(address(this).balance >= _amount, "transfer_fail_balance_not_enough");
+        payable(address(_receiver)).transfer(_amount);
+        emit TransferAmountEvent(_receiver, _amount);
     }
 
     function getOwner() public view returns (address payable) {

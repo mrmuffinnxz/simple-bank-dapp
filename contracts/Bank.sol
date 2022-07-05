@@ -9,16 +9,18 @@ contract Bank {
     mapping(string => Account) accounts;
     mapping(string => bool) isAccountNameExist;
 
-    function addAccount(string memory _name) public returns (string memory) {
+    event AddAccountEvent(address _user, string _name, Account _account);
+
+    function addAccount(string memory _name) public {
         require(isAccountNameExist[_name] == false, "add_account_fail_name_exist");
         Account newAccount = new Account(msg.sender, _name);
         users[msg.sender].push(newAccount);
         accounts[_name] = newAccount;
         isAccountNameExist[_name] = true;
-        return "add_account_success";
+        emit AddAccountEvent(msg.sender, _name, newAccount);
     }
 
-    function getAccountByName (string memory _name) public view returns (Account) {
+    function getAccountByName(string memory _name) public view returns (Account) {
         return accounts[_name];
     }
 

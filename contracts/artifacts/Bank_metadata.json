@@ -6,6 +6,31 @@
 	"output": {
 		"abi": [
 			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "address",
+						"name": "_user",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "string",
+						"name": "_name",
+						"type": "string"
+					},
+					{
+						"indexed": false,
+						"internalType": "contract Account",
+						"name": "_account",
+						"type": "address"
+					}
+				],
+				"name": "AddAccountEvent",
+				"type": "event"
+			},
+			{
 				"inputs": [
 					{
 						"internalType": "string",
@@ -14,14 +39,27 @@
 					}
 				],
 				"name": "addAccount",
-				"outputs": [
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
 					{
 						"internalType": "string",
-						"name": "",
+						"name": "_name",
 						"type": "string"
 					}
 				],
-				"stateMutability": "nonpayable",
+				"name": "getAccountByName",
+				"outputs": [
+					{
+						"internalType": "contract Account",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
 				"type": "function"
 			},
 			{
@@ -66,19 +104,19 @@
 	},
 	"sources": {
 		"contracts/Account.sol": {
-			"keccak256": "0x38507ffdfd6d64cf2a370d3621e5221521fa28a2d5873c1f1c1317b365055c56",
+			"keccak256": "0xf2e89966fa9bb8fb44b478241f53e570c59ba6df7f922b1fe37d9c4d3f1c6057",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://5ab07cbf41f36f1c8d0251e25d5b4ed4f686ddb792ab70508e4e7045f82e141a",
-				"dweb:/ipfs/QmRT3g1SJ6evqsReczHXZGGteWckEuzmN5yLH8VtbbiW93"
+				"bzz-raw://7fbedc975238471317efff55f594d156dcf3b00b2656337bf916b50eb861a367",
+				"dweb:/ipfs/Qmf1F7pLjxJNMS5LB4b1AWPRH4tZyDq4XcKxMHTJURUMnj"
 			]
 		},
 		"contracts/Bank.sol": {
-			"keccak256": "0x5731c48bbb3427d871437625c3f18ccba08a39dd0ce9c206503c71eadade6969",
+			"keccak256": "0x38a5a6f0a21f12bde3e213535a254f2d59354acb71e96166430eefbc41d305f0",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://486b299e5ef9f68861ad17c00bfd4718676a2bd635bb252d2e1ea43f5c5be79c",
-				"dweb:/ipfs/Qmd4ezX98Y9wxR9jBHKq1Vwd3MHERvpX11i8ZpUUxke4E1"
+				"bzz-raw://75a1423bf25adeb6b1889e012260e2dbf102af275e42351e97f4ea1d1e31e925",
+				"dweb:/ipfs/QmXGCEEHnR5co95RURmAn2xLhw3iwziEXKgpU1CqNUsTzw"
 			]
 		}
 	},
