@@ -63,7 +63,7 @@
 			{
 				"inputs": [
 					{
-						"internalType": "address",
+						"internalType": "contract Account",
 						"name": "receiver",
 						"type": "address"
 					},
@@ -81,7 +81,7 @@
 						"type": "string"
 					}
 				],
-				"stateMutability": "payable",
+				"stateMutability": "nonpayable",
 				"type": "function"
 			},
 			{
@@ -102,6 +102,10 @@
 				],
 				"stateMutability": "nonpayable",
 				"type": "function"
+			},
+			{
+				"stateMutability": "payable",
+				"type": "receive"
 			}
 		],
 		"devdoc": {
@@ -132,11 +136,11 @@
 	},
 	"sources": {
 		"contracts/Account.sol": {
-			"keccak256": "0x4e2649fca9700115532747927166a92940775f56c1d0efc93a8c1b5a8753d745",
+			"keccak256": "0xac7caae121acff162e32d3f5de4280349965cc6d1a26d3eb9898d2b328189c39",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://582841e573f370175ac6439b8b13137ca0e9e8f14400cd3f056c47125ddeaf94",
-				"dweb:/ipfs/QmdCb4fDAMcW8PP7St137iRCinsnTBY7vkEpHfEqQQxtzf"
+				"bzz-raw://59a0673408f4f9c3d4d4e88884f5355610e4ddde2cdf2f2eb54888346397c9e3",
+				"dweb:/ipfs/QmZsdbjA7DfvaFRiMKqtNME6kB7uZBaQxnqde8N2i5xjdJ"
 			]
 		}
 	},
