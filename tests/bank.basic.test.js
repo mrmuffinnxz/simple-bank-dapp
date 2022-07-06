@@ -24,5 +24,21 @@ describe("Bank Basic Test", function () {
             bank,
             "AddAccountEvent"
         );
+        await expect(bank.connect(user2).addAccount("B")).to.be.revertedWith(
+            "add_account_fail_name_exist"
+        );
+        await expect(bank.connect(user2).addAccount("C")).to.emit(
+            bank,
+            "AddAccountEvent"
+        );
+        const user1Accounts = await bank.connect(user1).getUserAccounts();
+        const user2Accounts = await bank.connect(user2).getUserAccounts();
+        
+        expect(user1Accounts.length).to.equal(2);
+        expect(user2Accounts.length).to.equal(1);
+
+        expect(await bank.connect(user1).getAccountByName("A")).to.equal(user1Accounts[0]);
+        expect(await bank.connect(user1).getAccountByName("B")).to.equal(user1Accounts[1]);
+        expect(await bank.connect(user1).getAccountByName("C")).to.equal(user2Accounts[0]);
     });
 });

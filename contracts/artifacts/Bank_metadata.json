@@ -171,7 +171,7 @@
 			},
 			{
 				"inputs": [],
-				"name": "getUserAccount",
+				"name": "getUserAccounts",
 				"outputs": [
 					{
 						"internalType": "contract Account[]",
@@ -245,7 +245,7 @@
 			"bytecodeHash": "ipfs"
 		},
 		"optimizer": {
-			"enabled": true,
+			"enabled": false,
 			"runs": 200
 		},
 		"remappings": []
@@ -260,11 +260,11 @@
 			]
 		},
 		"contracts/Bank.sol": {
-			"keccak256": "0xe71597fc806564b44b04350ff2439398169e68348a33355931e2213058daa73d",
+			"keccak256": "0x0a57b83247a5fd437e8b82bddf7491df07a8139ae97467b0979717adc729416b",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://097368a7910140e60f99490bb1cad3d2aabc924c46d7c604e401ee9d7d70b00a",
-				"dweb:/ipfs/Qmc2Aw8362pC8CzMFRSL9VB4sf4SZpesRsXEiM7kseDn2d"
+				"bzz-raw://1b12d26ed121cc1ad2e02462f18abf003f7a626a46d494bf8bcfcc46f7070490",
+				"dweb:/ipfs/QmW5sS3myKJzJ6WmSu4Dpfkb4rMPH5h27pPCyWrBf1R8UF"
 			]
 		}
 	},
