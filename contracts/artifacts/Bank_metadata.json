@@ -31,6 +31,81 @@
 				"type": "event"
 			},
 			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "address",
+						"name": "_from",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "string",
+						"name": "_to",
+						"type": "string"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "_amount",
+						"type": "uint256"
+					}
+				],
+				"name": "DepositEvent",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "string",
+						"name": "_from",
+						"type": "string"
+					},
+					{
+						"indexed": false,
+						"internalType": "string",
+						"name": "_to",
+						"type": "string"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "_amount",
+						"type": "uint256"
+					}
+				],
+				"name": "TransferAmountEvent",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "string",
+						"name": "_from",
+						"type": "string"
+					},
+					{
+						"indexed": false,
+						"internalType": "address",
+						"name": "_to",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "_amount",
+						"type": "uint256"
+					}
+				],
+				"name": "WithdrawnEvent",
+				"type": "event"
+			},
+			{
 				"inputs": [
 					{
 						"internalType": "string",
@@ -41,6 +116,19 @@
 				"name": "addAccount",
 				"outputs": [],
 				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "_name",
+						"type": "string"
+					}
+				],
+				"name": "deposit",
+				"outputs": [],
+				"stateMutability": "payable",
 				"type": "function"
 			},
 			{
@@ -63,16 +151,63 @@
 				"type": "function"
 			},
 			{
-				"inputs": [],
-				"name": "getAccounts",
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "_name",
+						"type": "string"
+					}
+				],
+				"name": "getBalanceByName",
 				"outputs": [
 					{
-						"internalType": "contract Account[]",
+						"internalType": "uint256",
 						"name": "",
-						"type": "address[]"
+						"type": "uint256"
 					}
 				],
 				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "_from",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "_to",
+						"type": "string"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_amount",
+						"type": "uint256"
+					}
+				],
+				"name": "transferAmount",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "_name",
+						"type": "string"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_amount",
+						"type": "uint256"
+					}
+				],
+				"name": "withdrawn",
+				"outputs": [],
+				"stateMutability": "nonpayable",
 				"type": "function"
 			}
 		],
@@ -104,19 +239,19 @@
 	},
 	"sources": {
 		"contracts/Account.sol": {
-			"keccak256": "0xf2e89966fa9bb8fb44b478241f53e570c59ba6df7f922b1fe37d9c4d3f1c6057",
+			"keccak256": "0x53993dbab67aa6d960a10b15e070caf20b7df4932a5c2a5da1c5e7ead50b243e",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://7fbedc975238471317efff55f594d156dcf3b00b2656337bf916b50eb861a367",
-				"dweb:/ipfs/Qmf1F7pLjxJNMS5LB4b1AWPRH4tZyDq4XcKxMHTJURUMnj"
+				"bzz-raw://508cd7776bd67b0c35c8c5d2cd21589cf8fc9268a79983fb6bc7bee7884aba04",
+				"dweb:/ipfs/QmTfKHHoWNFZXq1bddz7SFRQsr9YV6sK6Wo37e9yR8P5ZD"
 			]
 		},
 		"contracts/Bank.sol": {
-			"keccak256": "0x38a5a6f0a21f12bde3e213535a254f2d59354acb71e96166430eefbc41d305f0",
+			"keccak256": "0x5517e53b7a9ef12a6f859f409d3adbea432891a3c5d49ff0084173c33df76803",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://75a1423bf25adeb6b1889e012260e2dbf102af275e42351e97f4ea1d1e31e925",
-				"dweb:/ipfs/QmXGCEEHnR5co95RURmAn2xLhw3iwziEXKgpU1CqNUsTzw"
+				"bzz-raw://b4813135243f8527fd5de3a73ad1d09f27edc9e14af960d39ee2f4904356a677",
+				"dweb:/ipfs/QmXk6867uzVnPpC1NH44Q8gk1NP9dbstsYHqexkcZHhbZh"
 			]
 		}
 	},

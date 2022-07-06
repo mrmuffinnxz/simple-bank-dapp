@@ -3,46 +3,71 @@
 pragma solidity 0.8.15;
 
 contract Account {
-    address payable owner;
-    string name;
+    address private bank;
+    address private owner;
+    string private name;
 
     constructor(address _owner, string memory _name) {
+        bank = msg.sender;
         owner = payable(_owner);
         name = _name;
     }
 
-    receive() payable external {}
-    
-    event DepositEvent(address _from, uint _amount);
-    event WithdrawnEvent(address _to, uint _amount);
-    event TransferAmountEvent(Account _to, uint _amount);
+    event DepositEvent(address _from, uint256 _amount);
+    event WithdrawnEvent(address _to, uint256 _amount);
+    event TransferAmountEvent(Account _to, uint256 _amount);
 
-    function deposit() public payable {
-        require(msg.value > 0, "deposit_fail_value_zero");
+    receive() external payable {
+        require(msg.value > 0, "receive_fail_value_zero");
         emit DepositEvent(msg.sender, msg.value);
     }
 
-    function withdrawn(uint _amount) public {
-        require(owner == msg.sender, "withdrawn_fail_not_owner");
-        require(_amount > 0, "withdrawn_fail_value_zero");
-        require(address(this).balance >= _amount, "withdrawn_fail_balance_not_enough");
-        payable(msg.sender).transfer(_amount);
-        emit WithdrawnEvent(msg.sender, _amount);
+    function deposit(address _from) public payable {
+        require(msg.value > 0, "deposit_fail_value_zero");
+        emit DepositEvent(_from, msg.value);
     }
 
-    function transferAmount(Account _receiver, uint _amount) public {
-        require(owner == msg.sender, "transfer_fail_not_owner");
+    function withdrawn(address _receiver, uint256 _amount) public {
+        require(
+            msg.sender == bank || msg.sender == owner,
+            "withdrawn_fail_not_bank_or_owner"
+        );
+        require(_amount > 0, "withdrawn_fail_value_zero");
+        require(
+            this.getBalance() >= _amount,
+            "withdrawn_fail_balance_not_enough"
+        );
+        payable(_receiver).transfer(_amount);
+        emit WithdrawnEvent(_receiver, _amount);
+    }
+
+    function transferAmount(Account _receiver, uint256 _amount) public {
+        require(
+            msg.sender == bank || msg.sender == owner,
+            "transfer_fail_not_bank_or_owner"
+        );
         require(_amount > 0, "transfer_fail_value_zero");
-        require(address(this).balance >= _amount, "transfer_fail_balance_not_enough");
+        require(
+            this.getBalance() >= _amount,
+            "transfer_fail_balance_not_enough"
+        );
         payable(address(_receiver)).transfer(_amount);
         emit TransferAmountEvent(_receiver, _amount);
     }
 
-    function getOwner() public view returns (address payable) {
+    function getBank() public view returns (address) {
+        return bank;
+    }
+
+    function getOwner() public view returns (address) {
         return owner;
     }
 
-    function getBalance() public view returns (uint) {
+    function getName() public view returns (string memory) {
+        return name;
+    }
+
+    function getBalance() public view returns (uint256) {
         return address(this).balance;
     }
 }

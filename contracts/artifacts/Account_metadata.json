@@ -79,7 +79,13 @@
 				"type": "event"
 			},
 			{
-				"inputs": [],
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_from",
+						"type": "address"
+					}
+				],
 				"name": "deposit",
 				"outputs": [],
 				"stateMutability": "payable",
@@ -100,10 +106,36 @@
 			},
 			{
 				"inputs": [],
+				"name": "getBank",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "getName",
+				"outputs": [
+					{
+						"internalType": "string",
+						"name": "",
+						"type": "string"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
 				"name": "getOwner",
 				"outputs": [
 					{
-						"internalType": "address payable",
+						"internalType": "address",
 						"name": "",
 						"type": "address"
 					}
@@ -131,6 +163,11 @@
 			},
 			{
 				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_receiver",
+						"type": "address"
+					},
 					{
 						"internalType": "uint256",
 						"name": "_amount",
@@ -175,11 +212,11 @@
 	},
 	"sources": {
 		"contracts/Account.sol": {
-			"keccak256": "0xf2e89966fa9bb8fb44b478241f53e570c59ba6df7f922b1fe37d9c4d3f1c6057",
+			"keccak256": "0x53993dbab67aa6d960a10b15e070caf20b7df4932a5c2a5da1c5e7ead50b243e",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://7fbedc975238471317efff55f594d156dcf3b00b2656337bf916b50eb861a367",
-				"dweb:/ipfs/Qmf1F7pLjxJNMS5LB4b1AWPRH4tZyDq4XcKxMHTJURUMnj"
+				"bzz-raw://508cd7776bd67b0c35c8c5d2cd21589cf8fc9268a79983fb6bc7bee7884aba04",
+				"dweb:/ipfs/QmTfKHHoWNFZXq1bddz7SFRQsr9YV6sK6Wo37e9yR8P5ZD"
 			]
 		}
 	},
