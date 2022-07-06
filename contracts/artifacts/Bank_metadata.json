@@ -170,6 +170,19 @@
 				"type": "function"
 			},
 			{
+				"inputs": [],
+				"name": "getUserAccount",
+				"outputs": [
+					{
+						"internalType": "contract Account[]",
+						"name": "",
+						"type": "address[]"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
 				"inputs": [
 					{
 						"internalType": "string",
@@ -247,11 +260,11 @@
 			]
 		},
 		"contracts/Bank.sol": {
-			"keccak256": "0x5517e53b7a9ef12a6f859f409d3adbea432891a3c5d49ff0084173c33df76803",
+			"keccak256": "0xe71597fc806564b44b04350ff2439398169e68348a33355931e2213058daa73d",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://b4813135243f8527fd5de3a73ad1d09f27edc9e14af960d39ee2f4904356a677",
-				"dweb:/ipfs/QmXk6867uzVnPpC1NH44Q8gk1NP9dbstsYHqexkcZHhbZh"
+				"bzz-raw://097368a7910140e60f99490bb1cad3d2aabc924c46d7c604e401ee9d7d70b00a",
+				"dweb:/ipfs/Qmc2Aw8362pC8CzMFRSL9VB4sf4SZpesRsXEiM7kseDn2d"
 			]
 		}
 	},

@@ -5,6 +5,7 @@ pragma solidity 0.8.15;
 import "./Account.sol";
 
 contract Bank {
+    mapping(address => Account[]) userAccounts;
     mapping(string => Account) accounts;
     mapping(string => bool) isAccountNameExist;
 
@@ -19,6 +20,7 @@ contract Bank {
             "add_account_fail_name_exist"
         );
         Account newAccount = new Account(msg.sender, _name);
+        userAccounts[msg.sender].push(newAccount);
         accounts[_name] = newAccount;
         isAccountNameExist[_name] = true;
         emit AddAccountEvent(msg.sender, _name, newAccount);
@@ -89,5 +91,13 @@ contract Bank {
         returns (uint256)
     {
         return accounts[_name].getBalance();
+    }
+
+    function getUserAccounts()
+        public
+        view
+        returns (Account[] memory)
+    {
+        return userAccounts[msg.sender];
     }
 }
