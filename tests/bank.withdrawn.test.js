@@ -1,7 +1,7 @@
 import { expect } from "chai";
 import { ethers } from "hardhat";
 
-describe("Bank", function () {
+describe("Bank Withdrawn Test", function () {
     let Bank, bank, provider, user1, user2, user3;
 
     beforeEach(async () => {
