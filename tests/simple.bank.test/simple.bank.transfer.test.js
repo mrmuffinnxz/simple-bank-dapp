@@ -66,12 +66,12 @@ describe("Simple Bank Transfer Test", function () {
         await bank.connect(user1).addAccount("A");
         await bank.connect(user1).deposit("A", {
             value: ethers.utils.parseEther("1.0"),
-        })
+        });
 
         await bank.connect(user2).addAccount("B");
         await bank.connect(user2).deposit("B", {
             value: ethers.utils.parseEther("1.0"),
-        })
+        });
 
         await expect(
             bank.connect(user1).transferAmount("C", "B", ethers.utils.parseEther("0.1"))
@@ -103,17 +103,21 @@ describe("Simple Bank Transfer Test", function () {
 
         await expect(
             await bank.connect(user1).transferAmount("A", "B", ethers.utils.parseEther("0.1"))
-        ).to.emit(bank, "TransferAmountEvent").withArgs("A", "B", ethers.utils.parseEther("0.1"));
+        ).to.emit(bank, "TransferAmountEvent").withArgs("A", "B", ethers.utils.parseEther("0.099"));
 
         expect(await bank.connect(user1).getBalanceByName("A")).to.equal(ethers.utils.parseEther("0.9"));
         expect(await bank.connect(user1).getBalanceByName("B")).to.equal(ethers.utils.parseEther("1.099"));
+        expect(await bank.connect(user1).getBankBalance()).to.equal(ethers.utils.parseEther("0.001"));
 
         await expect(
             await bank.connect(user2).transferAmount("B", "A", ethers.utils.parseEther("0.2"))
-        ).to.emit(bank, "TransferAmountEvent").withArgs("B", "A", ethers.utils.parseEther("0.2"));
+        ).to.emit(bank, "TransferAmountEvent").withArgs("B", "A", ethers.utils.parseEther("0.198"));
 
-        expect(await bank.connect(user1).getBalanceByName("A")).to.equal(ethers.utils.parseEther("1.099"));
+        expect(await bank.connect(user1).getBalanceByName("A")).to.equal(ethers.utils.parseEther("1.098"));
         expect(await bank.connect(user1).getBalanceByName("B")).to.equal(ethers.utils.parseEther("0.899"));
+
+        expect(await bank.connect(user1).getBankBalance()).to.equal(ethers.utils.parseEther("0.003"));
+        expect(await provider.getBalance(bank.address)).to.equal(ethers.utils.parseEther("2.0"));
     });
     it("6. [BONUS] As a user, I want to transfer the ERC 20 token that is in the balance of my account to multipleaccounts at the same time through the list of account names.", async function () {
         await bank.connect(user1).addAccount("A");
@@ -132,27 +136,35 @@ describe("Simple Bank Transfer Test", function () {
         })
 
         await expect(
-            bank.connect(user1).transferAmount("C", ["A2", "B"], ethers.utils.parseEther("0.1"))
+            bank.connect(user1).transferAmountList("C", ["A2", "B"], ethers.utils.parseEther("0.1"))
         ).to.be.revertedWith("transfer_fail_from_name_not_exist");
 
         await expect(
-            bank.connect(user1).transferAmount("B", ["A", "A2"], ethers.utils.parseEther("0.1"))
+            bank.connect(user1).transferAmountList("B", ["A", "A2"], ethers.utils.parseEther("0.1"))
         ).to.be.revertedWith("transfer_fail_from_not_owner");
 
         await expect(
-            bank.connect(user1).transferAmount("A", ["A2", "B"], 99)
+            bank.connect(user1).transferAmountList("A", ["A2", "B"], 99)
         ).to.be.revertedWith("transfer_fail_value_less_than_100");
 
         await expect(
-            bank.connect(user1).transferAmount("A", ["A2", "B"], ethers.utils.parseEther("6.0"))
+            bank.connect(user1).transferAmountList("A", ["A2", "B"], ethers.utils.parseEther("6.0"))
         ).to.be.revertedWith("transfer_fail_from_balance_not_enough");
 
         await expect(
-            bank.connect(user1).transferAmount("A", ["A2", "C"], ethers.utils.parseEther("0.1"))
+            bank.connect(user1).transferAmountList("A", ["A2", "C"], ethers.utils.parseEther("0.1"))
         ).to.be.revertedWith("transfer_fail_to_name_not_exist");
 
-        expect(await bank.connect(user1).getBalanceByName("A")).to.equal(ethers.utils.parseEther("10.0"));
-        expect(await bank.connect(user1).getBalanceByName("A2")).to.equal(ethers.utils.parseEther("1.0"));
-        expect(await bank.connect(user1).getBalanceByName("B")).to.equal(ethers.utils.parseEther("1.0"));
+        await expect(
+            bank.connect(user1).transferAmountList("A", ["A2", "B"], ethers.utils.parseEther("0.1"))
+        ).to.emit(bank, "TransferAmountEvent").withArgs("A", "A2", ethers.utils.parseEther("0.1"))
+            .to.emit(bank, "TransferAmountEvent").withArgs("A", "B", ethers.utils.parseEther("0.099"));
+
+        expect(await bank.connect(user1).getBalanceByName("A")).to.equal(ethers.utils.parseEther("9.8"));
+        expect(await bank.connect(user1).getBalanceByName("A2")).to.equal(ethers.utils.parseEther("1.1"));
+        expect(await bank.connect(user1).getBalanceByName("B")).to.equal(ethers.utils.parseEther("1.099"));
+        
+        expect(await bank.connect(user1).getBankBalance()).to.equal(ethers.utils.parseEther("0.001"));
+        expect(await provider.getBalance(bank.address)).to.equal(ethers.utils.parseEther("12.0"));
     });
 });

@@ -25,6 +25,7 @@ contract SimpleBank {
     event DepositEvent(address _from, string _to, uint256 _amount);
     event WithdrawnEvent(string _from, address _to, uint256 _amount);
     event TransferAmountEvent(string _from, string _to, uint256 _amount);
+    event withdrawnBankBalanceEvent(uint256 _amount);
 
     function addAccount(string memory _name) public {
         require(
@@ -102,11 +103,12 @@ contract SimpleBank {
     }
 
     function withdrawnBankBalance(uint256 _amount) public {
-        require(bankOwner == msg.sender, "withdrawn_fail_not_owner");
-        require(_amount > 0, "withdrawn_fail_value_zero");
-        require(bankBalance >= _amount, "withdrawn_fail_balance_not_enough");
+        require(bankOwner == msg.sender, "withdrawn_bank_fail_not_owner");
+        require(_amount > 0, "withdrawn_bank_fail_value_zero");
+        require(bankBalance >= _amount, "withdrawn_bank_fail_balance_not_enough");
         bankBalance -= _amount;
         payable(msg.sender).transfer(_amount);
+        emit withdrawnBankBalanceEvent(_amount);
     }
 
     function transferAmountList(
