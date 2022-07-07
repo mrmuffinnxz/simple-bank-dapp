@@ -3,7 +3,8 @@
 pragma solidity 0.8.15;
 
 contract SimpleBank {
-    address owner;
+    address bankOwner;
+    uint256 bankBalance;
 
     struct Account {
         address owner;
@@ -15,7 +16,12 @@ contract SimpleBank {
     mapping(string => Account) accounts;
     mapping(string => bool) isAccountNameExist;
 
-    event AddAccountEvent(address _user, string _name, Account _account);
+    constructor() {
+        bankOwner = msg.sender;
+        bankBalance = 0;
+    }
+
+    event AddAccountEvent(address _user, string _name);
     event DepositEvent(address _from, string _to, uint256 _amount);
     event WithdrawnEvent(string _from, address _to, uint256 _amount);
     event TransferAmountEvent(string _from, string _to, uint256 _amount);
@@ -28,7 +34,7 @@ contract SimpleBank {
         accounts[_name] = Account(msg.sender, _name, 0);
         userAccounts[msg.sender].push(_name);
         isAccountNameExist[_name] = true;
-        emit AddAccountEvent(msg.sender, _name, accounts[_name]);
+        emit AddAccountEvent(msg.sender, _name);
     }
 
     function deposit(string memory _name) public payable {
@@ -56,6 +62,7 @@ contract SimpleBank {
             "withdrawn_fail_balance_not_enough"
         );
         accounts[_name].balance -= _amount;
+        payable(msg.sender).transfer(_amount);
         emit WithdrawnEvent(_name, msg.sender, _amount);
     }
 
@@ -76,18 +83,74 @@ contract SimpleBank {
             accounts[_from].owner == msg.sender,
             "transfer_fail_from_not_owner"
         );
-        require(
-            accounts[_to].owner == msg.sender,
-            "transfer_fail_to_not_owner"
-        );
-        require(_amount > 0, "transfer_fail_value_zero");
+        require(_amount >= 100, "transfer_fail_value_less_than_100");
         require(
             accounts[_from].balance >= _amount,
             "transfer_fail_from_balance_not_enough"
         );
-        accounts[_from].balance -= _amount;
-        accounts[_to].balance += _amount;
-        emit TransferAmountEvent(_from, _to, _amount);
+        if (accounts[_from].owner != accounts[_to].owner) {
+            uint256 fee = _amount / 100;
+            bankBalance += fee;
+            accounts[_from].balance -= _amount;
+            accounts[_to].balance += (_amount - fee);
+            emit TransferAmountEvent(_from, _to, _amount - fee);
+        } else {
+            accounts[_from].balance -= _amount;
+            accounts[_to].balance += _amount;
+            emit TransferAmountEvent(_from, _to, _amount);
+        }
+    }
+
+    function withdrawnBankBalance(uint256 _amount) public {
+        require(bankOwner == msg.sender, "withdrawn_fail_not_owner");
+        require(_amount > 0, "withdrawn_fail_value_zero");
+        require(bankBalance >= _amount, "withdrawn_fail_balance_not_enough");
+        bankBalance -= _amount;
+        payable(msg.sender).transfer(_amount);
+    }
+
+    function transferList(
+        string memory _from,
+        string[] memory _tos,
+        uint256 _amount
+    ) public {
+        require(
+            isAccountNameExist[_from] == true,
+            "transfer_fail_from_name_not_exist"
+        );
+        for (uint256 i = 0; i < _tos.length; i++) {
+            
+        }
+        require(
+            accounts[_from].owner == msg.sender,
+            "transfer_fail_from_not_owner"
+        );
+        require(_amount >= 100, "transfer_fail_value_less_than_100");
+        require(
+            accounts[_from].balance >= _amount * _tos.length,
+            "transfer_fail_from_balance_not_enough"
+        );
+        for (uint256 i = 0; i < _tos.length; i++) {
+            require(
+                isAccountNameExist[_tos[i]] == true,
+                "transfer_fail_to_name_not_exist"
+            );
+            if (accounts[_from].owner != accounts[_tos[i]].owner) {
+                require(
+                    isAccountNameExist[_tos[i]] == true,
+                    "transfer_fail_to_name_not_exist"
+                );
+                uint256 fee = _amount / 100;
+                bankBalance += fee;
+                accounts[_from].balance -= _amount;
+                accounts[_tos[i]].balance += (_amount - fee);
+                emit TransferAmountEvent(_from, _tos[i], _amount - fee);
+            } else {
+                accounts[_from].balance -= _amount;
+                accounts[_tos[i]].balance += _amount;
+                emit TransferAmountEvent(_from, _tos[i], _amount);
+            }
+        }
     }
 
     function getAccountByName(string memory _name)
