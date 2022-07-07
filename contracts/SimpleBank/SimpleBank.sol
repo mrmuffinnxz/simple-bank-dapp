@@ -133,10 +133,6 @@ contract SimpleBank {
                 "transfer_fail_to_name_not_exist"
             );
             if (accounts[_from].owner != accounts[_tos[i]].owner) {
-                require(
-                    isAccountNameExist[_tos[i]] == true,
-                    "transfer_fail_to_name_not_exist"
-                );
                 uint256 fee = _amount / 100;
                 bankBalance += fee;
                 accounts[_from].balance -= _amount;

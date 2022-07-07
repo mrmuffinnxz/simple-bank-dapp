@@ -313,11 +313,11 @@
 	},
 	"sources": {
 		"contracts/SimpleBank/SimpleBank.sol": {
-			"keccak256": "0x8a9217adcbeac1d0099d99651206d228ec4a9a7695cf2cd7f6f4fbb29c65d082",
+			"keccak256": "0x362ece1eeab955e97210068ffbb3d83ceb18656f4b1b9a4e776a12f951bf24a4",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://7e91f3f93bcf75b8a56f817274877a382cd95804082c6358cf310b92a6337d44",
-				"dweb:/ipfs/QmdXnRvob47KotpSgD8pQpSaqhr7LATwTwGMCB3hqWBFVy"
+				"bzz-raw://a6c85996cdebc2bb11c4fee95f6b6bedfdf5cdde1eb7c244758e373936656a02",
+				"dweb:/ipfs/QmUpXNPWd5cUcUJiiyC6uWpQNRWfffKp4qi42phHCvKocr"
 			]
 		}
 	},

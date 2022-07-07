@@ -27,9 +27,13 @@ describe("Simple Bank Deposit Test", function () {
             })
         ).to.be.revertedWith("deposit_fail_value_zero");
 
+        expect(await bank.connect(user1).getBalanceByName("A")).to.equal(ethers.utils.parseEther("0"));
+
         await expect(await bank.connect(user1).deposit("A", {
             value: ethers.utils.parseEther("1.0"),
         })).to.emit(bank, "DepositEvent").withArgs(user1.address, "A", ethers.utils.parseEther("1.0"));
+
+        expect(await bank.connect(user1).getBalanceByName("A")).to.equal(ethers.utils.parseEther("1.0"));
 
         await expect(await bank.connect(user2).deposit("A", {
             value: ethers.utils.parseEther("1.0"),
