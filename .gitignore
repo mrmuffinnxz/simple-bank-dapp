@@ -238,4 +238,5 @@ package-lock.json
 
 # End of https://www.toptal.com/developers/gitignore/api/node,solidity,soliditytruffle
 
-contracts/artifacts/build-info
+contracts/Bank/artifacts/build-info
+contracts/SimpleBank/artifacts/build-info

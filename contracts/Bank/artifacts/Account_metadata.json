@@ -197,7 +197,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"contracts/Account.sol": "Account"
+			"contracts/Bank/Account.sol": "Account"
 		},
 		"evmVersion": "london",
 		"libraries": {},
@@ -211,7 +211,7 @@
 		"remappings": []
 	},
 	"sources": {
-		"contracts/Account.sol": {
+		"contracts/Bank/Account.sol": {
 			"keccak256": "0x53993dbab67aa6d960a10b15e070caf20b7df4932a5c2a5da1c5e7ead50b243e",
 			"license": "MIT",
 			"urls": [

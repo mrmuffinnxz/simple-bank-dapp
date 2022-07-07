@@ -150,12 +150,12 @@ contract SimpleBank {
         }
     }
 
-    function getAccountByName(string memory _name)
+    function getOwnerByName(string memory _name)
         public
         view
-        returns (Account memory)
+        returns (address)
     {
-        return accounts[_name];
+        return accounts[_name].owner;
     }
 
     function getBalanceByName(string memory _name)
@@ -166,11 +166,15 @@ contract SimpleBank {
         return accounts[_name].balance;
     }
 
-    function getUserAccounts(address _user)
-        public
-        view
-        returns (string[] memory)
-    {
-        return userAccounts[_user];
+    function getUserAccounts() public view returns (string[] memory) {
+        return userAccounts[msg.sender];
+    }
+
+    function getBankOwner() public view returns (address) {
+        return bankOwner;
+    }
+
+    function getBankBalance() public view returns (uint256) {
+        return bankBalance;
     }
 }

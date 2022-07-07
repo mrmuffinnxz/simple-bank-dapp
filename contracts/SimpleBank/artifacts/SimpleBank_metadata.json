@@ -6,6 +6,11 @@
 	"output": {
 		"abi": [
 			{
+				"inputs": [],
+				"stateMutability": "nonpayable",
+				"type": "constructor"
+			},
+			{
 				"anonymous": false,
 				"inputs": [
 					{
@@ -19,12 +24,6 @@
 						"internalType": "string",
 						"name": "_name",
 						"type": "string"
-					},
-					{
-						"indexed": false,
-						"internalType": "contract Account",
-						"name": "_account",
-						"type": "address"
 					}
 				],
 				"name": "AddAccountEvent",
@@ -139,10 +138,36 @@
 						"type": "string"
 					}
 				],
-				"name": "getAccountByName",
+				"name": "getBalanceByName",
 				"outputs": [
 					{
-						"internalType": "contract Account",
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "getBankBalance",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "getBankOwner",
+				"outputs": [
+					{
+						"internalType": "address",
 						"name": "",
 						"type": "address"
 					}
@@ -158,12 +183,12 @@
 						"type": "string"
 					}
 				],
-				"name": "getBalanceByName",
+				"name": "getOwnerByName",
 				"outputs": [
 					{
-						"internalType": "uint256",
+						"internalType": "address",
 						"name": "",
-						"type": "uint256"
+						"type": "address"
 					}
 				],
 				"stateMutability": "view",
@@ -174,9 +199,9 @@
 				"name": "getUserAccounts",
 				"outputs": [
 					{
-						"internalType": "contract Account[]",
+						"internalType": "string[]",
 						"name": "",
-						"type": "address[]"
+						"type": "string[]"
 					}
 				],
 				"stateMutability": "view",
@@ -209,6 +234,29 @@
 				"inputs": [
 					{
 						"internalType": "string",
+						"name": "_from",
+						"type": "string"
+					},
+					{
+						"internalType": "string[]",
+						"name": "_tos",
+						"type": "string[]"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_amount",
+						"type": "uint256"
+					}
+				],
+				"name": "transferAmountList",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "string",
 						"name": "_name",
 						"type": "string"
 					},
@@ -219,6 +267,19 @@
 					}
 				],
 				"name": "withdrawn",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_amount",
+						"type": "uint256"
+					}
+				],
+				"name": "withdrawnBankBalance",
 				"outputs": [],
 				"stateMutability": "nonpayable",
 				"type": "function"
@@ -237,7 +298,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"contracts/Bank.sol": "Bank"
+			"contracts/SimpleBank/SimpleBank.sol": "SimpleBank"
 		},
 		"evmVersion": "london",
 		"libraries": {},
@@ -251,20 +312,12 @@
 		"remappings": []
 	},
 	"sources": {
-		"contracts/Account.sol": {
-			"keccak256": "0x53993dbab67aa6d960a10b15e070caf20b7df4932a5c2a5da1c5e7ead50b243e",
+		"contracts/SimpleBank/SimpleBank.sol": {
+			"keccak256": "0x8a9217adcbeac1d0099d99651206d228ec4a9a7695cf2cd7f6f4fbb29c65d082",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://508cd7776bd67b0c35c8c5d2cd21589cf8fc9268a79983fb6bc7bee7884aba04",
-				"dweb:/ipfs/QmTfKHHoWNFZXq1bddz7SFRQsr9YV6sK6Wo37e9yR8P5ZD"
-			]
-		},
-		"contracts/Bank.sol": {
-			"keccak256": "0x0a57b83247a5fd437e8b82bddf7491df07a8139ae97467b0979717adc729416b",
-			"license": "MIT",
-			"urls": [
-				"bzz-raw://1b12d26ed121cc1ad2e02462f18abf003f7a626a46d494bf8bcfcc46f7070490",
-				"dweb:/ipfs/QmW5sS3myKJzJ6WmSu4Dpfkb4rMPH5h27pPCyWrBf1R8UF"
+				"bzz-raw://7e91f3f93bcf75b8a56f817274877a382cd95804082c6358cf310b92a6337d44",
+				"dweb:/ipfs/QmdXnRvob47KotpSgD8pQpSaqhr7LATwTwGMCB3hqWBFVy"
 			]
 		}
 	},

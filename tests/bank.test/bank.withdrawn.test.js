@@ -38,8 +38,7 @@ describe("Bank Withdrawn Test", function () {
 
         await expect(
             await bank.connect(user1).withdrawn("A", ethers.utils.parseEther("0.1"))
-        ).to.changeEtherBalances([accountA, user1], [-ethers.utils.parseEther("0.1"), ethers.utils.parseEther("0.1")])
-            .to.emit(bank, "WithdrawnEvent").withArgs("A", user1.address, ethers.utils.parseEther("0.1"));
+        ).to.emit(bank, "WithdrawnEvent").withArgs("A", user1.address, ethers.utils.parseEther("0.1"));
     });
     it("3.5. Directly withdrawn from Account Contract", async function () {
         await bank.connect(user1).addAccount("A");
@@ -63,13 +62,11 @@ describe("Bank Withdrawn Test", function () {
 
         await expect(
             await accountA.connect(user1).withdrawn(user1.address, ethers.utils.parseEther("0.1"))
-        ).to.changeEtherBalances([accountA, user1], [-ethers.utils.parseEther("0.1"), ethers.utils.parseEther("0.1")])
-            .to.emit(accountA, "WithdrawnEvent").withArgs(user1.address, ethers.utils.parseEther("0.1"));
+        ).to.emit(accountA, "WithdrawnEvent").withArgs(user1.address, ethers.utils.parseEther("0.1"));
 
         await expect(
             await accountA.connect(user1).withdrawn(user2.address, ethers.utils.parseEther("0.1"))
-        ).to.changeEtherBalances([accountA, user2], [-ethers.utils.parseEther("0.1"), ethers.utils.parseEther("0.1")])
-            .to.emit(accountA, "WithdrawnEvent").withArgs(user2.address, ethers.utils.parseEther("0.1"));
+        ).to.emit(accountA, "WithdrawnEvent").withArgs(user2.address, ethers.utils.parseEther("0.1"));
 
         expect(await bank.connect(user1).getBalanceByName("A")).to.equal(ethers.utils.parseEther("0.8"));
     });

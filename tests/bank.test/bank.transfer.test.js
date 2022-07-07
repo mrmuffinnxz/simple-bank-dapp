@@ -53,15 +53,13 @@ describe("Bank Transfer Test", function () {
 
         await expect(
             await bank.connect(user1).transferAmount("A", "B", ethers.utils.parseEther("0.1"))
-        ).to.changeEtherBalances([accountA, accountB], [-ethers.utils.parseEther("0.1"), ethers.utils.parseEther("0.1")])
-            .to.emit(bank, "TransferAmountEvent").withArgs("A", "B", ethers.utils.parseEther("0.1"))
+        ).to.emit(bank, "TransferAmountEvent").withArgs("A", "B", ethers.utils.parseEther("0.1"))
             .to.emit(accountA, "TransferAmountEvent").withArgs(accountB.address, ethers.utils.parseEther("0.1"))
             .to.emit(accountB, "DepositEvent").withArgs(accountA.address, ethers.utils.parseEther("0.1"));
 
         await expect(
             await bank.connect(user2).transferAmount("B", "A", ethers.utils.parseEther("0.2"))
-        ).to.changeEtherBalances([accountB, accountA], [-ethers.utils.parseEther("0.2"), ethers.utils.parseEther("0.2")])
-            .to.emit(bank, "TransferAmountEvent").withArgs("B", "A", ethers.utils.parseEther("0.2"))
+        ).to.emit(bank, "TransferAmountEvent").withArgs("B", "A", ethers.utils.parseEther("0.2"))
             .to.emit(accountB, "TransferAmountEvent").withArgs(accountA.address, ethers.utils.parseEther("0.2"))
             .to.emit(accountA, "DepositEvent").withArgs(accountB.address, ethers.utils.parseEther("0.2"));
 
@@ -98,14 +96,12 @@ describe("Bank Transfer Test", function () {
 
         await expect(
             await accountA.connect(user1).transferAmount(accountB.address, ethers.utils.parseEther("0.1"))
-        ).to.changeEtherBalances([accountA, accountB], [-ethers.utils.parseEther("0.1"), ethers.utils.parseEther("0.1")])
-            .to.emit(accountA, "TransferAmountEvent").withArgs(accountB.address, ethers.utils.parseEther("0.1"))
+        ).to.emit(accountA, "TransferAmountEvent").withArgs(accountB.address, ethers.utils.parseEther("0.1"))
             .to.emit(accountB, "DepositEvent").withArgs(accountA.address, ethers.utils.parseEther("0.1"));
         
         await expect(
             await accountB.connect(user2).transferAmount(accountA.address, ethers.utils.parseEther("0.2"))
-        ).to.changeEtherBalances([accountB, accountA], [-ethers.utils.parseEther("0.2"), ethers.utils.parseEther("0.2")])
-            .to.emit(accountB, "TransferAmountEvent").withArgs(accountA.address, ethers.utils.parseEther("0.2"))
+        ).to.emit(accountB, "TransferAmountEvent").withArgs(accountA.address, ethers.utils.parseEther("0.2"))
             .to.emit(accountA, "DepositEvent").withArgs(accountB.address, ethers.utils.parseEther("0.2"));
             
         expect(await bank.connect(user1).getBalanceByName("A")).to.equal(ethers.utils.parseEther("1.1"));

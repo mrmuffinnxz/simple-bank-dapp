@@ -33,16 +33,14 @@ describe("Bank Deposit Test", function () {
             await bank.connect(user1).deposit("A", {
                 value: ethers.utils.parseEther("1.0"),
             })
-        ).to.changeEtherBalances([user1, accountA], [-ethers.utils.parseEther("1.0"), ethers.utils.parseEther("1.0")])
-            .to.emit(bank, "DepositEvent").withArgs(user1.address, "A", ethers.utils.parseEther("1.0"))
+        ).to.emit(bank, "DepositEvent").withArgs(user1.address, "A", ethers.utils.parseEther("1.0"))
             .to.emit(accountA, "DepositEvent").withArgs(user1.address, ethers.utils.parseEther("1.0"));
 
         await expect(
             await bank.connect(user2).deposit("A", {
                 value: ethers.utils.parseEther("1.0"),
             })
-        ).to.changeEtherBalances([user2, accountA], [-ethers.utils.parseEther("1.0"), ethers.utils.parseEther("1.0")])
-            .to.emit(bank, "DepositEvent").withArgs(user2.address, "A", ethers.utils.parseEther("1.0"))
+        ).to.emit(bank, "DepositEvent").withArgs(user2.address, "A", ethers.utils.parseEther("1.0"))
             .to.emit(accountA, "DepositEvent").withArgs(user2.address, ethers.utils.parseEther("1.0"));
 
         expect(await bank.connect(user1).getBalanceByName("A")).to.equal(ethers.utils.parseEther("2.0"));
@@ -62,15 +60,13 @@ describe("Bank Deposit Test", function () {
             await accountA.connect(user1).deposit(user1.address, {
                 value: ethers.utils.parseEther("1.0"),
             })
-        ).to.changeEtherBalances([user1, accountA], [-ethers.utils.parseEther("1.0"), ethers.utils.parseEther("1.0")])
-            .to.emit(accountA, "DepositEvent").withArgs(user1.address, ethers.utils.parseEther("1.0"));
+        ).to.emit(accountA, "DepositEvent").withArgs(user1.address, ethers.utils.parseEther("1.0"));
 
         await expect(
             await accountA.connect(user2).deposit(user2.address, {
                 value: ethers.utils.parseEther("1.0"),
             })
-        ).to.changeEtherBalances([user2, accountA], [-ethers.utils.parseEther("1.0"), ethers.utils.parseEther("1.0")])
-            .to.emit(accountA, "DepositEvent").withArgs(user2.address, ethers.utils.parseEther("1.0"));
+        ).to.emit(accountA, "DepositEvent").withArgs(user2.address, ethers.utils.parseEther("1.0"));
 
         expect(await bank.connect(user1).getBalanceByName("A")).to.equal(ethers.utils.parseEther("2.0"));
     });
