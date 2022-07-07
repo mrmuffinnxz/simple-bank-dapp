@@ -109,7 +109,7 @@ contract SimpleBank {
         payable(msg.sender).transfer(_amount);
     }
 
-    function transferList(
+    function transferAmountList(
         string memory _from,
         string[] memory _tos,
         uint256 _amount
@@ -118,9 +118,6 @@ contract SimpleBank {
             isAccountNameExist[_from] == true,
             "transfer_fail_from_name_not_exist"
         );
-        for (uint256 i = 0; i < _tos.length; i++) {
-            
-        }
         require(
             accounts[_from].owner == msg.sender,
             "transfer_fail_from_not_owner"
