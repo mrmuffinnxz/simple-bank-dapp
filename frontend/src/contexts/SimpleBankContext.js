@@ -1,4 +1,4 @@
-import React, { useState, useEffect, createContext, useContext } from "react";
+import React, { useState, useEffect, createContext, useContext, useCallback } from "react";
 import contract from "../contracts/SimpleBank.json";
 import { ethers } from "ethers";
 import { useMetaMask } from "./MetaMaskContext";
@@ -33,19 +33,18 @@ export default function SimpleBankProvider({ children }) {
         }
     }, [ethereum]);
 
-    async function reloadAccount() {
+    const reloadAccount = useCallback(async () => {
         if (user && simpleBankContract) {
             let accs = await simpleBankContract.getUserAccounts();
             setAccounts(accs);
-            console.log(accs);
         }
-    }
+    }, [user, simpleBankContract]);
 
     useEffect(() => {
         reloadAccount();
-    }, [user, simpleBankContract]);
+    }, [reloadAccount]);
 
-    const value = { simpleBankContract };
+    const value = { simpleBankContract, accounts };
 
     return (
         <SimepleBankContext.Provider value={value}>

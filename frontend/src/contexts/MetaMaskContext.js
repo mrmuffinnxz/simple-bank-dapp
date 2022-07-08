@@ -1,4 +1,10 @@
-import React, { useState, createContext, useContext, useEffect } from "react";
+import React, {
+    useState,
+    createContext,
+    useContext,
+    useEffect,
+    useCallback,
+} from "react";
 
 const MetaMaskContext = createContext();
 
@@ -10,7 +16,7 @@ export default function MetaMaskProvider({ children }) {
     const [user, setUser] = useState();
     const { ethereum } = window;
 
-    async function connectWallet() {
+    const connectWallet = useCallback(async () => {
         if (ethereum) {
             const accounts = await ethereum.request({
                 method: "eth_requestAccounts",
@@ -20,7 +26,7 @@ export default function MetaMaskProvider({ children }) {
                 setUser({ address: accounts[0], chain: chainId });
             }
         }
-    }
+    }, [ethereum]);
 
     useEffect(() => {
         if (ethereum) {
@@ -35,7 +41,7 @@ export default function MetaMaskProvider({ children }) {
                 }
             });
         }
-    }, [ethereum, user]);
+    }, [ethereum, user, connectWallet]);
 
     const value = {
         user,
