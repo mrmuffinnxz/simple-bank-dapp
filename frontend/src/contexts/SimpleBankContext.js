@@ -33,8 +33,24 @@ export default function SimpleBankProvider({ children }) {
                 abi,
                 signer
             );
-            let accs = await simpleBankContract.getUserAccounts();
-            setAccounts(accs);
+            let names = await simpleBankContract.getUserAccounts();
+
+            const getBalanceByName = async (name) => {
+                let balance = ethers.utils.formatEther(
+                    await simpleBankContract.getBalanceByName(name)
+                );
+                return {
+                    name,
+                    balance,
+                };
+            };
+            const promises = [];
+            names.forEach((name) => {
+                promises.push(getBalanceByName(name));
+            });
+            Promise.all(promises).then((results) => {
+                setAccounts(results);
+            });
         }
     }, [ethereum]);
 

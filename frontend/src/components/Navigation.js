@@ -10,7 +10,7 @@ export default function Navigation() {
             {user ? (
                 user.chain === "0x5" ? (
                     <div className="navigation-account">
-                        {user.address.substring(0, 20) + "..."}
+                        {user.address.substring(0, 5) + "..." + user.address.substr(user.address.length - 5)}
                     </div>
                 ) : (
                     <div className="navigation-account" style={{fontSize: "1vw"}}>
