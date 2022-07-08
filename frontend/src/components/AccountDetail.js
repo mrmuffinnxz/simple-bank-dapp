@@ -1,31 +1,66 @@
-import React from "react";
+import React, { useState } from "react";
+import DepositMode from "./DepositMode";
 
 export default function AccountDetail({ account }) {
-    return (
-        <div className="account-detail">
-            <table className="account-detail-table">
-                <tr>
-                    <td>Account Name:</td>
-                    <td style={{ textAlign: "right" }}>{account.name}</td>
-                </tr>
-                <tr>
-                    <td>Balance:</td>
-                    <td style={{ textAlign: "right" }}>
-                        {account.balance} GoerliETH
-                    </td>
-                </tr>
-            </table>
-            <div className="account-detail-control">
-                <div className="navigation-account" style={{ width: "25%" }}>
-                    Deposit
-                </div>
-                <div className="navigation-account" style={{ width: "25%" }}>
-                    Withdrawn
-                </div>
-                <div className="navigation-account" style={{ width: "25%" }}>
-                    Transfer
+    const [mode, setMode] = useState("");
+
+    var content = "";
+    if (mode === "deposit") {
+        content = <DepositMode account={account} setMode={setMode} />;
+    } else {
+        content = (
+            <div className="account-detail">
+                <table className="account-detail-table">
+                    <tbody>
+                        <tr>
+                            <td>Account Name:</td>
+                            <td style={{ textAlign: "right" }}>
+                                {account.name}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Balance:</td>
+                            <td style={{ textAlign: "right" }}>
+                                {account.balance} GoerliETH
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div className="account-detail-control">
+                    <div
+                        className="navigation-account"
+                        style={{ width: "25%" }}
+                        onClick={(e) => {
+                            e.preventDefault();
+                            setMode("deposit");
+                        }}
+                    >
+                        Deposit
+                    </div>
+                    <div
+                        className="navigation-account"
+                        style={{ width: "25%" }}
+                        onClick={(e) => {
+                            e.preventDefault();
+                            setMode("withdrawn");
+                        }}
+                    >
+                        Withdrawn
+                    </div>
+                    <div
+                        className="navigation-account"
+                        style={{ width: "25%" }}
+                        onClick={(e) => {
+                            e.preventDefault();
+                            setMode("transfer");
+                        }}
+                    >
+                        Transfer
+                    </div>
                 </div>
             </div>
-        </div>
-    );
+        );
+    }
+
+    return content;
 }

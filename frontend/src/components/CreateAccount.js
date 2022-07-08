@@ -54,7 +54,7 @@ export default function CreateAccount() {
                                     })
                                     .catch(() => {
                                         setError(
-                                            "Create account failed, this account name might be already in use."
+                                            "Create account failed, account name might be already in use."
                                         );
                                         setLoading(false);
                                     });

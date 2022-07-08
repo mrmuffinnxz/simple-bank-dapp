@@ -67,13 +67,28 @@ export default function SimpleBankProvider({ children }) {
         reloadAccount();
     }
 
+    async function deposit(name, amount) {
+        const provider = new ethers.providers.Web3Provider(ethereum);
+        const signer = provider.getSigner();
+        const simpleBankContract = new ethers.Contract(
+            contractAddress,
+            abi,
+            signer
+        );
+        let tx = await simpleBankContract.deposit(name, {
+            value: ethers.utils.parseEther(amount),
+        });
+        await tx.wait();
+        reloadAccount();
+    }
+
     useEffect(() => {
         if (user) {
             reloadAccount();
         }
     }, [user, reloadAccount]);
 
-    const value = { accounts, addAccount };
+    const value = { accounts, addAccount, deposit };
 
     return (
         <SimepleBankContext.Provider value={value}>
