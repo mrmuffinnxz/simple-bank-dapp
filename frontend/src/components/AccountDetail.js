@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import DepositMode from "./DepositMode";
+import WithdrawnMode from "./WithdrawnMode";
 
 export default function AccountDetail({ account }) {
     const [mode, setMode] = useState("");
@@ -7,13 +8,15 @@ export default function AccountDetail({ account }) {
     var content = "";
     if (mode === "deposit") {
         content = <DepositMode account={account} setMode={setMode} />;
-    } else {
+    } else if (mode === "withdrawn") {
+        content = <WithdrawnMode account={account} setMode={setMode} />;
+    }else {
         content = (
             <div className="account-detail">
                 <table className="account-detail-table">
                     <tbody>
                         <tr>
-                            <td>Account Name:</td>
+                            <td>Account name:</td>
                             <td style={{ textAlign: "right" }}>
                                 {account.name}
                             </td>

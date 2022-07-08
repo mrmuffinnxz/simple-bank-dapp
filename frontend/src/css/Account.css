@@ -11,7 +11,7 @@
     align-items: center; 
     justify-content: center;
     width: 70%;
-    height: 100px;
+    min-height: 100px;
     border: 2px dashed plum;
     padding: 20px;
     margin-top: 20px;
@@ -24,7 +24,7 @@
     align-items: center; 
     justify-content: center;
     width: 70%;
-    height: 100px;
+    min-height: 100px;
     border: 2px solid plum;
     padding: 20px;
     margin-top: 20px;
@@ -51,7 +51,7 @@
     align-items: center; 
     justify-content: center;
     width: 70%;
-    height: 100px;
+    min-height: 100px;
     border: 2px solid plum;
     padding: 20px;
     margin-top: 20px;

@@ -1,24 +1,24 @@
 import React, { useState } from "react";
 import { useSimpleBank } from "../contexts/SimpleBankContext";
 
-export default function DepositMode({ account, setMode }) {
+export default function WithdrawnMode({ account, setMode }) {
     const [amount, setAmount] = useState("");
-    const { deposit } = useSimpleBank();
+    const { withdrawn } = useSimpleBank();
 
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(false);
 
     return loading ? (
-        <div className="account-add-form">Depositing...</div>
+        <div className="account-add-form">Withdrawning...</div>
     ) : (
         <div className="account-add-form">
-            <div style={{ marginBottom: "10px" }}>Deposit</div>
+            <div style={{ marginBottom: "10px" }}>Withdrawn</div>
             <div
                 style={{
                     width: "100%",
                     display: "flex",
                     justifyContent: "space-between",
-                    marginBottom: "10px"
+                    marginBottom: "10px",
                 }}
             >
                 <div>Account name:</div> <div>{account.name}</div>
@@ -55,7 +55,7 @@ export default function DepositMode({ account, setMode }) {
                         setLoading(true);
                         setError("");
                         if (!isNaN(amount)) {
-                            deposit(account.name, amount)
+                            withdrawn(account.name, amount)
                                 .then(() => {
                                     setMode("");
                                     setLoading(false);
@@ -63,17 +63,19 @@ export default function DepositMode({ account, setMode }) {
                                 })
                                 .catch(() => {
                                     setError(
-                                        "Deposit failed, wrong account name, or amount equal zero, or insufficient balance in wallet"
+                                        "Withdrawn failed, wrong account name, or not account owner, or amount equal zero, or insufficient balance in account"
                                     );
                                     setLoading(false);
                                 });
                         } else {
-                            setError("Deposit failed, Only accept real number");
+                            setError(
+                                "Withdrawn failed, Only accept real number"
+                            );
                             setLoading(false);
                         }
                     }}
                 >
-                    Deposit
+                    Withdrawn
                 </div>
             </div>
             <div
