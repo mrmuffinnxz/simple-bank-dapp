@@ -23,6 +23,16 @@ export default function WithdrawnMode({ account, setMode }) {
             >
                 <div>Account name:</div> <div>{account.name}</div>
             </div>
+            <div
+                style={{
+                    width: "100%",
+                    display: "flex",
+                    justifyContent: "space-between",
+                    marginBottom: "10px",
+                }}
+            >
+                <div>Balance:</div> <div>{account.balance} GoerliETH</div>
+            </div>
             <div className="account-add-form-input">
                 <div style={{ width: "40%" }}>GoerliETH amount:</div>
                 <input

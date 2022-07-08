@@ -25,6 +25,16 @@ export default function TransferMode({ account, setMode }) {
                 <div>Account name:</div> <div>{account.name}</div>
             </div>
             <div
+                style={{
+                    width: "100%",
+                    display: "flex",
+                    justifyContent: "space-between",
+                    marginBottom: "10px",
+                }}
+            >
+                <div>Balance:</div> <div>{account.balance} GoerliETH</div>
+            </div>
+            <div
                 className="account-add-form-input"
                 style={{ marginBottom: "10px" }}
             >
