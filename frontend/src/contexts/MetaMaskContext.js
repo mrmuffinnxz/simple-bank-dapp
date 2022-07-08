@@ -15,11 +15,27 @@ export default function MetaMaskProvider({ children }) {
             const accounts = await ethereum.request({
                 method: "eth_requestAccounts",
             });
+            const chainId = await ethereum.request({ method: "eth_chainId" });
             if (accounts.length > 0) {
-                setUser(accounts[0]);
+                setUser({ address: accounts[0], chain: chainId });
             }
         }
     }
+
+    useEffect(() => {
+        if (ethereum) {
+            ethereum.on("chainChanged", () => {
+                if (user) {
+                    connectWallet();
+                }
+            });
+            ethereum.on("accountsChanged", () => {
+                if (user) {
+                    connectWallet();
+                }
+            });
+        }
+    }, [ethereum, user]);
 
     const value = {
         user,

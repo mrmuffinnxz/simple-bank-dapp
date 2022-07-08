@@ -3,15 +3,21 @@ import { useMetaMask } from "../contexts/MetaMaskContext";
 import "../css/Navigation.css";
 
 export default function Navigation() {
-    const { user } = useMetaMask();
+    const { user, connectWallet } = useMetaMask();
 
     return (
         <div className="navigation-container">
             <h2 style={{ marginLeft: "10px", padding: "5px" }}>10XBANK</h2>
             {user ? (
-                <div className="navigation-account">
-                    {user.substring(0, 20) + "..."}
-                </div>
+                user.chain === "0x5" ? (
+                    <div className="navigation-account">
+                        {user.address.substring(0, 20) + "..."}
+                    </div>
+                ) : (
+                    <div className="navigation-account" style={{fontSize: "1vw"}}>
+                        Wrong chain! Please change to Goerli Test Network
+                    </div>
+                )
             ) : (
                 <div
                     className="navigation-account"
