@@ -240,3 +240,4 @@ package-lock.json
 
 contracts/Bank/artifacts/build-info
 contracts/SimpleBank/artifacts/build-info
+contracts/artifacts/build-info
