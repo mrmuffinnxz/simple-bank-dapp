@@ -8,7 +8,9 @@
 - Hardhat + Chai contract test unit
 - ReactJs + EthersJs frontend
 
-### Deployed Contract : [Link](https://goerli.etherscan.io/address/0x0625b3ebc42f138c89d165c9484933df0c16ebaa)
-### Code walk-through : [Link](https://goerli.etherscan.io/address/0x0625b3ebc42f138c89d165c9484933df0c16ebaa)
+## Aditional Information
 
-### This project is coded by Jetnipat Lapsuwannawong for SCB10X Blockcamp 2022 qualification
+- Deployed Contract : [Link](https://goerli.etherscan.io/address/0x0625b3ebc42f138c89d165c9484933df0c16ebaa)
+- Code walk-through : [Link](https://goerli.etherscan.io/address/0x0625b3ebc42f138c89d165c9484933df0c16ebaa)
+
+## This project is coded by Jetnipat Lapsuwannawong for SCB10X Blockcamp 2022 qualification
