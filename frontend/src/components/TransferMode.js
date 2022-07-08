@@ -59,6 +59,40 @@ export default function TransferMode({ account, setMode }) {
                     }}
                 ></input>
             </div>
+            <div
+                style={{
+                    color: "red",
+                    fontSize: "12px",
+                    marginTop: "20px",
+                }}
+            >
+                *If you transfer to your account, you don't have to pay any fee.
+            </div>
+            <div
+                style={{
+                    color: "red",
+                    fontSize: "12px",
+                }}
+            >
+                *If you transfer to other account you have to pay 1% fee
+            </div>
+            <div
+                style={{
+                    color: "red",
+                    fontSize: "12px",
+                }}
+            >
+                {"Fee: "}
+                {amount !== "" && !isNaN(amount)
+                    ? parseFloat(amount) / 100
+                    : "0"}
+                {" GoerliETH | "}
+                {"Receive: "}
+                {amount !== "" && !isNaN(amount)
+                    ? (parseFloat(amount) * 99) / 100
+                    : "0"}
+                {" GoerliETH"}
+            </div>
             <div className="account-add-form-button">
                 <div
                     className="navigation-account"
