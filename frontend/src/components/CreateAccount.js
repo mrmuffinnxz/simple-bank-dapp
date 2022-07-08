@@ -34,6 +34,7 @@ export default function CreateAccount() {
                             setIsOpenCreate(false);
                             setLoading(false);
                             setError("");
+                            setName("");
                         }}
                     >
                         Cancel
@@ -49,6 +50,7 @@ export default function CreateAccount() {
                                     .then(() => {
                                         setIsOpenCreate(false);
                                         setLoading(false);
+                                        setName("");
                                     })
                                     .catch(() => {
                                         setError(
