@@ -1,5 +1,5 @@
+import React from "react";
+
 export default function Account() {
-    return <div>
-        Account
-    </div>
+    return <div className="account-container">Account</div>;
 }

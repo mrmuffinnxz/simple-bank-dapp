@@ -1,21 +1,16 @@
-import React, { useState } from "react";
+import React from "react";
+import { useMetaMask } from "../contexts/MetaMaskContext";
 import "../css/Navigation.css";
 
 export default function Navigation() {
-    const [account, setAccount] = useState();
-    async function connectWallet() {
-        const accounts = await window.ethereum.request({
-            method: "eth_requestAccounts",
-        });
-        setAccount(accounts[0]);
-    }
+    const { user } = useMetaMask();
 
     return (
         <div className="navigation-container">
-            <h4>10XBANK</h4>
-            {account ? (
+            <h2 style={{ marginLeft: "10px", padding: "5px" }}>10XBANK</h2>
+            {user ? (
                 <div className="navigation-account">
-                    {account.substring(0, 20) + "..."}
+                    {user.substring(0, 20) + "..."}
                 </div>
             ) : (
                 <div
