@@ -98,13 +98,30 @@ export default function SimpleBankProvider({ children }) {
         reloadAccount();
     }
 
+    async function transfer(from, to, amount) {
+        const provider = new ethers.providers.Web3Provider(ethereum);
+        const signer = provider.getSigner();
+        const simpleBankContract = new ethers.Contract(
+            contractAddress,
+            abi,
+            signer
+        );
+        let tx = await simpleBankContract.transferAmount(
+            from,
+            to,
+            ethers.utils.parseEther(amount)
+        );
+        await tx.wait();
+        reloadAccount();
+    }
+
     useEffect(() => {
         if (user) {
             reloadAccount();
         }
     }, [user, reloadAccount]);
 
-    const value = { accounts, addAccount, deposit, withdrawn };
+    const value = { accounts, addAccount, deposit, withdrawn, transfer };
 
     return (
         <SimepleBankContext.Provider value={value}>

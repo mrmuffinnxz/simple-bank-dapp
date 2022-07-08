@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import DepositMode from "./DepositMode";
+import TransferMode from "./TransferMode";
 import WithdrawnMode from "./WithdrawnMode";
 
 export default function AccountDetail({ account }) {
@@ -10,7 +11,9 @@ export default function AccountDetail({ account }) {
         content = <DepositMode account={account} setMode={setMode} />;
     } else if (mode === "withdrawn") {
         content = <WithdrawnMode account={account} setMode={setMode} />;
-    }else {
+    } else if (mode === "transfer") {
+        content = <TransferMode account={account} setMode={setMode} />;
+    } else {
         content = (
             <div className="account-detail">
                 <table className="account-detail-table">
