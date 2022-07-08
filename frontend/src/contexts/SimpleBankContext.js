@@ -1,4 +1,10 @@
-import React, { useState, useEffect, createContext, useContext, useCallback } from "react";
+import React, {
+    useState,
+    useEffect,
+    createContext,
+    useContext,
+    useCallback,
+} from "react";
 import contract from "../contracts/SimpleBank.json";
 import { ethers } from "ethers";
 import { useMetaMask } from "./MetaMaskContext";
@@ -16,35 +22,42 @@ export default function SimpleBankProvider({ children }) {
     const { ethereum } = window;
     const { user } = useMetaMask();
 
-    const [simpleBankContract, setSimpleBankContract] = useState();
     const [accounts, setAccounts] = useState();
 
-    useEffect(() => {
+    const reloadAccount = useCallback(async () => {
         if (ethereum) {
-            const provider = new ethers.providers.getDefaultProvider("goerli", {
-                etherscan: process.env.REACT_APP_ETHERSCAN_API_KEY,
-            });
-            const bankContract = new ethers.Contract(
+            const provider = new ethers.providers.Web3Provider(ethereum);
+            const signer = provider.getSigner();
+            const simpleBankContract = new ethers.Contract(
                 contractAddress,
                 abi,
-                provider
+                signer
             );
-            setSimpleBankContract(bankContract);
-        }
-    }, [ethereum]);
-
-    const reloadAccount = useCallback(async () => {
-        if (user && simpleBankContract) {
             let accs = await simpleBankContract.getUserAccounts();
             setAccounts(accs);
         }
-    }, [user, simpleBankContract]);
+    }, [ethereum]);
+
+    async function addAccount(name) {
+        const provider = new ethers.providers.Web3Provider(ethereum);
+        const signer = provider.getSigner();
+        const simpleBankContract = new ethers.Contract(
+            contractAddress,
+            abi,
+            signer
+        );
+        let tx = await simpleBankContract.addAccount(name);
+        await tx.wait();
+        reloadAccount();
+    }
 
     useEffect(() => {
-        reloadAccount();
-    }, [reloadAccount]);
+        if (user) {
+            reloadAccount();
+        }
+    }, [user, reloadAccount]);
 
-    const value = { simpleBankContract, accounts };
+    const value = { accounts, addAccount };
 
     return (
         <SimepleBankContext.Provider value={value}>

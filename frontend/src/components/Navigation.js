@@ -1,13 +1,12 @@
 import React from "react";
 import { useMetaMask } from "../contexts/MetaMaskContext";
-import "../css/Navigation.css";
 
 export default function Navigation() {
     const { user, connectWallet } = useMetaMask();
 
     return (
         <div className="navigation-container">
-            <h2 style={{ marginLeft: "10px", padding: "5px" }}>10XBANK</h2>
+            <h2>10XBANK</h2>
             {user ? (
                 user.chain === "0x5" ? (
                     <div className="navigation-account">

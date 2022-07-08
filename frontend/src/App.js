@@ -2,7 +2,10 @@ import React from "react";
 import Account from "./components/Account";
 import Navigation from "./components/Navigation";
 import AppProvider from "./contexts/AppProvider";
+
 import "./css/App.css";
+import "./css/Account.css";
+import "./css/Navigation.css";
 
 export default function App() {
     return (

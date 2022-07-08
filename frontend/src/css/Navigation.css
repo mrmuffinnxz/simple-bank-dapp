@@ -1,6 +1,6 @@
 .navigation-container {
     width: 100%;
-    height: 50px;
+    height: 30px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -15,5 +15,8 @@
     border: 2px solid plum;
     cursor: pointer;
     padding: 5px;
-    margin-right: 10px;
+}
+.navigation-account:hover {
+    background-color: plum;
+    color: white;
 }

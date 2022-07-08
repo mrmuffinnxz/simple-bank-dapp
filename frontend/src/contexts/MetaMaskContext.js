@@ -29,6 +29,10 @@ export default function MetaMaskProvider({ children }) {
     }, [ethereum]);
 
     useEffect(() => {
+        connectWallet();
+    }, [connectWallet]);
+
+    useEffect(() => {
         if (ethereum) {
             ethereum.on("chainChanged", () => {
                 if (user) {
