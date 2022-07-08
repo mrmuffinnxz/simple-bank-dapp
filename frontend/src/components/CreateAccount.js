@@ -6,6 +6,9 @@ export default function CreateAccount() {
     const [name, setName] = useState("");
     const { addAccount } = useSimpleBank();
 
+    const [error, setError] = useState("");
+    const [loading, setLoading] = useState(false);
+
     return isOpenCreate ? (
         <div className="account-add-form">
             <div className="account-add-form-input">
@@ -26,6 +29,8 @@ export default function CreateAccount() {
                     onClick={(e) => {
                         e.preventDefault();
                         setIsOpenCreate(false);
+                        setLoading(false);
+                        setError("");
                     }}
                 >
                     Cancel
@@ -34,13 +39,33 @@ export default function CreateAccount() {
                     className="navigation-account"
                     onClick={(e) => {
                         e.preventDefault();
+                        setLoading(true);
+                        setError("");
                         if (name !== "") {
-                            addAccount(name);
+                            addAccount(name)
+                                .then(() => {
+                                    setIsOpenCreate(false);
+                                    setLoading(false);
+                                })
+                                .catch(() => {
+                                    setError(
+                                        "Create account failed, this account name might be already in use."
+                                    );
+                                    setLoading(false);
+                                });
                         }
                     }}
                 >
                     Create
                 </div>
+            </div>
+            <div
+                style={{
+                    color: "red",
+                    marginTop: error === "" ? "0px" : "10px",
+                }}
+            >
+                {error}
             </div>
         </div>
     ) : (
